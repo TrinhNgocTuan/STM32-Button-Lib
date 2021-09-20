@@ -143,11 +143,10 @@ static void button_config_gpio(Button *btn)
 	{
 		__HAL_RCC_GPIOD_CLK_ENABLE();
 	}
-  /*Configure GPIO pins : PA0 PA1 PA2 */
   GPIO_InitStruct.Pin = btn->gpio_pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = btn->button_active == BUTTON_ACTIVE_LOW? GPIO_PULLUP: GPIO_PULLDOWN;
-  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+  HAL_GPIO_Init(btn->gpio_port, &GPIO_InitStruct);
 }
 //button_active: BUTTON_ACTIVE_LOW, BUTTON_ACTIVE_HIGH
 void button_init(Button *btn,GPIO_TypeDef *port,uint16_t pin,uint8_t button_active,uint8_t button_id)
